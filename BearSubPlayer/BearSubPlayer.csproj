@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Version>1.3.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ConfReaderLib">
+      <HintPath>Extension\ConfReaderLib.dll</HintPath>
+    </Reference>
+    <Reference Include="TriggerLib">
+      <HintPath>Extension\TriggerLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="config.conf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
