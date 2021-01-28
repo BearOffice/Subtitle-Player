@@ -8,11 +8,12 @@ namespace BearSubPlayer
 {
     public partial class MainWindow : Window
     {
+        private Brush _currentBrush;
+
         // ------ Main window Drag func + show/hide ------
         private void Main_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                this.DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed) DragMove();
         }
 
         private void Main_MouseLeave(object sender, MouseEventArgs e)

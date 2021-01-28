@@ -8,9 +8,7 @@ namespace BearSubPlayer
     /// </summary>
     public partial class SettingWindow : Window
     {
-        public static bool IsOpened { get; private set; } = false;
-
-        public SettingWindow()
+        private SettingWindow()
         {
             InitializeComponent();
             Initialize();
@@ -18,7 +16,7 @@ namespace BearSubPlayer
 
         private void Initialize()
         {
-            var config = new Config();
+            var config = Config.GetConfig();
 
             OpacitySld.Value = config.MainOp;
             OpacityLb.Content = (int)(config.MainOp * 100) + "%";

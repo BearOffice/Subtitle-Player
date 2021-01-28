@@ -14,7 +14,7 @@
         <SolidColorBrush Color="White" Opacity="0.5"/>
     </Window.Background>
     <Canvas x:Name="MainCanvas">
-        <Label x:Name="SubLabel" Content="Double click here to select a srt file"
+        <Label x:Name="SubLabel" Content="Double click here to select a subtitle file"
                Height="80" BorderThickness="15,0,15,0" Padding="0,0,0,0"
                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                Canvas.Top="0" Canvas.Left="0" Canvas.Right="0"

@@ -6,6 +6,9 @@ namespace BearSubPlayer
 {
     public partial class SettingWindow : Window
     {
+        public static SettingWindow Self { get; private set; } = new SettingWindow();
+        private bool _exitsign = false;
+
         private void Main_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
                     => Main_Changed();
 
@@ -14,7 +17,7 @@ namespace BearSubPlayer
 
         private void Main_Changed()
         {
-            if (!this.IsInitialized) return;
+            if (!IsInitialized) return;
 
             OpacityLb.Content = (int)(OpacitySld.Value * 100) + "%";  // Change float to %
             if ((bool)WhiteRBtn.IsChecked)
@@ -41,7 +44,7 @@ namespace BearSubPlayer
 
         private void Font_Changed()
         {
-            if (!this.IsInitialized) return;
+            if (!IsInitialized) return;
 
             FontSizeLb.Content = (int)FontSizeSld.Value + "pt";
             FontShadowOpacityLb.Content = (int)(FontShadowOpacitySld.Value * 100) + "%"; // Change float to %
@@ -69,7 +72,7 @@ namespace BearSubPlayer
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            _exitsign = true;
             Application.Current.Shutdown();
         }
 
@@ -81,38 +84,21 @@ namespace BearSubPlayer
         }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
-            => this.Close();
+            => Close();
 
-        private void SettingWindow_Activated(object sender, EventArgs e)
-            => IsOpened = true;
-
-        private void SettingWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SettingWindow_Closed(object sender, EventArgs e)
         {
-            Save();
-            IsOpened = false;
-        }
-
-        private void Save()
-        {
-            var config = new Config
+            Config.SaveConfig(new ConfigArgs
             {
                 MainOp = Math.Round(OpacitySld.Value * 100) / 100,  // Round the number
                 FontSize = (int)FontSizeSld.Value,
                 FontOp = Math.Round(FontShadowOpacitySld.Value * 100) / 100,
                 FontSn = (int)FontShadowSoftnessSld.Value,
-            };
+                MainCol = (bool)WhiteRBtn.IsChecked ? 0 : 1,
+                FontCol = (bool)FontWhiteRBtn.IsChecked ? 0 : 1,
+            });
 
-            if ((bool)WhiteRBtn.IsChecked)  // White
-                config.MainCol = 0;
-            else
-                config.MainCol = 1;
-
-            if ((bool)FontWhiteRBtn.IsChecked)  // White
-                config.FontCol = 0;
-            else
-                config.FontCol = 1;
-
-            config.Save();
+            if (!_exitsign) Self = new SettingWindow();  // Create settingwindow's instance will interrupt the exiting procedure
         }
     }
 }

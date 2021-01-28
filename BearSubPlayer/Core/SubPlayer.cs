@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using BearSubPlayer.Sub;
+using BearSubPlayer.SubTitle;
 
-namespace BearSubPlayer.Core
+namespace BearSubPlayer
 {
     public class SubPlayer
     {

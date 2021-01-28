@@ -2,12 +2,14 @@
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
-using BearSubPlayer.Core;
 
 namespace BearSubPlayer
 {
     public partial class MainWindow : Window
     {
+        private SubPlayer _subPlayer;
+
+
         // ------ TimeTextbox func + show/hide ------
         private void TimeTBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -67,11 +69,7 @@ namespace BearSubPlayer
 
         private void SettingLb_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (!SettingWindow.IsOpened)
-            {
-                var settingwindow = new SettingWindow();
-                settingwindow.Show();
-            }
+            SettingWindow.Self.Show();
         }
     }
 }

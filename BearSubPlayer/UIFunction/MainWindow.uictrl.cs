@@ -131,8 +131,7 @@ namespace BearSubPlayer
 
         private void MainInitialize()
         {
-            var config = new Config();
-
+            var config = Config.GetConfig();
             if (config.MainCol == 0)  // White
                 MainBackground(Brushes.Black, Colors.White, config.MainOp);
             else
@@ -188,7 +187,7 @@ namespace BearSubPlayer
         private void MainReset(bool ispartial)
         {
             if (!ispartial)
-                SubLbContent("Double click here to select a srt file");
+                SubLbContent("Double click here to select a subtitle file");
             PlayPanelIsEnabled(false);
             TimeSldValue(0);
             TimeLbContent("00:00:00 / 00:00:00");

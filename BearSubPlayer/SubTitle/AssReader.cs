@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace BearSubPlayer.Sub
+namespace BearSubPlayer.SubTitle
 {
     public class AssReader : ISubReader
     {

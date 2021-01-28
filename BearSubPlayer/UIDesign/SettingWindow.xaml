@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:BearSubPlayer"
         mc:Ignorable="d"
         Title="Setting" Height="250" Width="340" ResizeMode="NoResize"
-        Activated="SettingWindow_Activated"
-        Closing="SettingWindow_Closing">
+        Closed="SettingWindow_Closed">
     <Grid>
         <TabControl>
             <TabItem Header="Main Window">
@@ -69,7 +68,7 @@
             </TabItem>
         </TabControl>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,158,0,0">
-            <Button x:Name="ExitBtn" Content="Exit This App"
+            <Button x:Name="ExitBtn" Content="Exit this app"
                     Width="80" Height="24" Margin="10,0,10,0"
                     Click="ExitBtn_Click"/>
             <Button x:Name="SetDefaultBtn" Content="Set to Default"
