@@ -4,7 +4,7 @@
   
  This will help you when you watch online videos but there are no subtitles or the subtitles are of poor quality.  
   
-  Using library [ConfReaderLib](https://github.com/MisakiBear/ConfReaderLib) and [TriggerLib](https://github.com/MisakiBear/TriggerLib).  
+  Using library [ConfigReadingLib](https://github.com/MisakiBear/ConfigReadingLib) and [TriggerLib](https://github.com/MisakiBear/TriggerLib).  
   .Net5.0 is needed.  
   
   > Old Repository: https://github.com/MisakiBear/Subtitle-Player-Obsolete-  
