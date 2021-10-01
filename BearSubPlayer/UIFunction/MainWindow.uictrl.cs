@@ -15,9 +15,6 @@ namespace BearSubPlayer
                 case Element.TimeLabel:
                     TimeLbContent(str);
                     break;
-                case Element.TimeSlider:
-                    TimeSldValue(double.Parse(str));
-                    break;
                 case Element.SubLabel:
                     SubLbContent(str);
                     break;
@@ -31,7 +28,7 @@ namespace BearSubPlayer
             switch (elem)
             {
                 case Element.TimeSlider:
-                    TimeSldValue(val);
+                    if (MenuPanel.Visibility == Visibility.Visible) TimeSldValue(val);
                     break;
                 default:
                     throw new NotImplementedException();
