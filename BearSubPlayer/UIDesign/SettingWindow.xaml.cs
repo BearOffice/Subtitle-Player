@@ -16,7 +16,7 @@ namespace BearSubPlayer
 
         private void Initialize()
         {
-            var config = Config.GetConfig();
+            var config = Config.GetConfigArgs();
 
             OpacitySld.Value = config.MainOp;
             OpacityLb.Content = (int)(config.MainOp * 100) + "%";

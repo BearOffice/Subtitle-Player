@@ -128,7 +128,7 @@ namespace BearSubPlayer
 
         private void MainInitialize()
         {
-            var config = Config.GetConfig();
+            var config = Config.GetConfigArgs();
             if (config.MainCol == 0)  // White
                 MainBackground(Brushes.Black, Colors.White, config.MainOp);
             else
