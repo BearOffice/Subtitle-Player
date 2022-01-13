@@ -4,7 +4,7 @@
   
  This will help you when you watch online videos but there are no subtitles or the subtitles are of poor quality.  
   
-  Using library [BearMarkupLanguageLib](https://github.com/BearOffice/BearMarkupLanguageLib) and [TriggerLib](https://github.com/MisakiBear/TriggerLib).  
+  Using library [BearMarkupLanguageLib](https://github.com/BearOffice/BearMarkupLanguageLib) and [TriggerLib](https://github.com/BearOffice/TriggerLib).  
   .Net6.0 is needed.  
   
   
