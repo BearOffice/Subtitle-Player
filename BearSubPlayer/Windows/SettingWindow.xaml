@@ -1,0 +1,175 @@
+﻿<Window x:Class="BearSubPlayer.Windows.SettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BearSubPlayer"
+        xmlns:helpers="clr-namespace:BearSubPlayer.Helpers" 
+        mc:Ignorable="d" ThemeMode="System"
+        Title="Setting" Height="580" Width="450" ResizeMode="NoResize"
+        Closed="Window_Closed">
+    <Window.Resources>
+        <helpers:SliderToPercentConverter x:Key="SliderToPercentConverter" />
+        <Style x:Key="ElementBorderStyle" TargetType="Border">
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Background" Value="{DynamicResource LayerFillColorDefaultBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
+            <Setter Property="BorderThickness" Value="1,1,1,1"/>
+            <Setter Property="CornerRadius" Value="5,5,5,5"/>
+        </Style>
+        <Style x:Key="TItleStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Style="{StaticResource ElementBorderStyle}" Margin="12">
+            <StackPanel>
+                <TextBlock Style="{StaticResource TItleStyle}" Text="Main Panel" />
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="0.80*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle}" Content="Opacity" />
+                    <Slider  Grid.Column="1" x:Name="PNOpacitySlider"
+                        Maximum="1" LargeChange="0.1" SmallChange="0.01" Value="0.5"
+                        ValueChanged="PNOpacitySlider_ValueChanged"/>
+                    <Label Grid.Column="2" Style="{StaticResource LabelStyle}" Margin="5,0,0,0"
+                           Width="35" HorizontalContentAlignment="Right">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource SliderToPercentConverter}">
+                                <Binding ElementName="PNOpacitySlider" Path="Value"/>
+                                <Binding ElementName="PNOpacitySlider" Path="Maximum"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle}" Content="Color" />
+                    <ComboBox x:Name="PNColorComboBox" Grid.Column="1" Width="150" 
+                              SelectionChanged="PNColorComboBox_SelectionChanged">
+                        <ComboBoxItem Content="White" />
+                        <ComboBoxItem Content="Black" />
+                    </ComboBox>
+                </Grid>
+                <Separator Margin="0,0,0,6"/>
+                <TextBlock Style="{StaticResource TItleStyle}" Text="Font" />
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="0.80*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle}" Content="Size" />
+                    <Slider  Grid.Column="1" x:Name="FontSizeSlider"
+                        Maximum="46" LargeChange="6" SmallChange="1" Value="32" Minimum="12"
+                        ValueChanged="FontSizeSlider_ValueChanged"/>
+                    <Label Grid.Column="2" Style="{StaticResource LabelStyle}" Margin="5,0,0,0"
+                           Width="35" HorizontalContentAlignment="Right">
+                        <TextBlock Text="{Binding ElementName=FontSizeSlider, Path=Value, StringFormat={}{0:0}pt}" />
+                    </Label>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle}" Content="Color" />
+                    <ComboBox x:Name="FontColorComboBox" Grid.Column="1" Width="150" 
+                        SelectionChanged="FontColorComboBox_SelectionChanged">
+                        <ComboBoxItem Content="White" />
+                        <ComboBoxItem Content="Black" />
+                    </ComboBox>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="0.80*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle}" Content="Shadow opacity" />
+                    <Slider  Grid.Column="1" x:Name="ShadowOpacitySlider"
+                        Maximum="1" LargeChange="0.1" SmallChange="0.01" Value="0.5"
+                        ValueChanged="ShadowOpacitySlider_ValueChanged"/>
+                    <Label Grid.Column="2" Style="{StaticResource LabelStyle}" Margin="5,0,0,0"
+                           Width="35" HorizontalContentAlignment="Right">
+                        <Label.Content>
+                            <MultiBinding Converter="{StaticResource SliderToPercentConverter}">
+                                <Binding ElementName="ShadowOpacitySlider" Path="Value"/>
+                                <Binding ElementName="ShadowOpacitySlider" Path="Maximum"/>
+                            </MultiBinding>
+                        </Label.Content>
+                    </Label>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="0.80*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle}" Content="Shadow softness" />
+                    <Slider  Grid.Column="1" x:Name="ShadowSoftnessSlider"
+                        Maximum="15" Value="8" Minimum="5"
+                        ValueChanged="ShadowSoftnessSlider_ValueChanged"/>
+                    <Label Grid.Column="2" Style="{StaticResource LabelStyle}" Margin="5,0,0,0"
+                           Width="35" HorizontalContentAlignment="Right">
+                        <TextBlock Text="{Binding ElementName=ShadowSoftnessSlider, Path=Value, StringFormat={}{0:0}pt}" />
+                    </Label>
+                </Grid>
+                <Separator Margin="0,0,0,6"/>
+                <TextBlock Style="{StaticResource TItleStyle}" Text="Others" />
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Style="{StaticResource LabelStyle}" Content="Auto play trigger" />
+                    <ComboBox x:Name="AutoPlayTriggerComboBox" Grid.Column="1" Width="150"
+                              SelectionChanged="AutoPlayTriggerComboBox_SelectionChanged">
+                        <ComboBoxItem Content="None" />
+                        <ComboBoxItem Content="MouseLeftClick" />
+                        <ComboBoxItem Content="SpaceKey" />
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Button x:Name="SetDefaultButton" Margin="10,0,10,0"
+                    Click="SetDefaultButton_Click">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" Margin="0,0,6,0"
+                               FontFamily="{StaticResource SymbolThemeFontFamily}" Text="&#xE845;"/>
+                    <TextBlock Text="Set to Default"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="ExitButton" Margin="10,0,10,0" 
+                    Click="ExitButton_Click">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" Margin="0,0,6,0"
+                               FontFamily="{StaticResource SymbolThemeFontFamily}" Text="&#xE7E8;"/>
+                    <TextBlock Text="Exit this app"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

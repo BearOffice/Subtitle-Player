@@ -1,0 +1,16 @@
+﻿<Window x:Class="BearSubPlayer.Windows.TimeJumpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BearSubPlayer.Windows"
+        mc:Ignorable="d" ThemeMode="System" Topmost="True"
+        Title="TimeJumpWindow" Height="100" Width="280" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <TextBox x:Name="TimeTextBox" TextWrapping="NoWrap" Text="00:00:00.000" Width="155" MaxLength="15"
+                     KeyDown="TimeTextBox_KeyDown"/>
+            <Button Margin="10,0,0,0" Content="Jump" Click="Button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

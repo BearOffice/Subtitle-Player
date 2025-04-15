@@ -1,0 +1,124 @@
+﻿<Window x:Class="BearSubPlayer.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BearSubPlayer"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        Title="BearSubPlayer"
+        Height="82" Width="700" WindowStyle="None" AllowsTransparency="True" 
+        WindowStartupLocation="Manual" Topmost="True" ShowInTaskbar="False"
+        MouseDown="Main_MouseDown" MouseMove="Main_MouseMove"
+        MouseLeave="Main_MouseLeave">
+    <Window.Background>
+        <SolidColorBrush Color="White" Opacity="0.5"/>
+    </Window.Background>
+    <Window.Resources>
+        <!--<Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+            <Setter Property="FontFamily" Value="Segoe Fluent Icons"/>
+        </Style>-->
+        <Style x:Key="ControlTBStyle" TargetType="TextBlock">
+            <Setter Property="Width" Value="24" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}" />
+            <Setter Property="ToolTipService.InitialShowDelay" Value="50"/>
+
+            <Style.Triggers>
+                <!--<Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>-->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Gray"
+                                                      BlurRadius="10"
+                                                      ShadowDepth="0"
+                                                      Opacity="0.6"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="MainGrid">
+        <Label x:Name="SubLabel"
+               Content="Double click here to select a subtitle file"
+               Height="80" Padding="15,0,15,0"
+               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+               FontSize="32" Foreground="Black"
+               MouseDoubleClick="SubLabel_MouseDoubleClick">
+            <Label.Effect>
+                <DropShadowEffect Color="White" Direction="320" ShadowDepth="3" Opacity="0.5" BlurRadius="8"/>
+            </Label.Effect>
+        </Label>
+
+        <Grid x:Name="MenuPanel" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0.1*" />
+            </Grid.ColumnDefinitions> 
+            <Grid x:Name="PlayPanel" Grid.Column="1" IsEnabled="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TimeTB" Grid.Column="0" Text="00:00:00 / 00:00:00" MouseDown="TimeTB_MouseDown"
+                    Width="140" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                <Slider x:Name="TimeSlider" Grid.Column="1" Height="30" SmallChange="1" LargeChange="10" Maximum="100" 
+                    MouseMove="TimeSlider_MouseMove" />
+                <StackPanel x:Name="PlayControlsPanel" Grid.Column="2" Orientation="Horizontal" Margin="10,0,0,0">
+                    <TextBlock x:Name="PlayTB" Style="{StaticResource ControlTBStyle}"
+                        Text="&#xE768;" MouseDown="PlayTB_MouseDown">
+                        <TextBlock.ToolTip>
+                            <TextBlock FontFamily="Segoe UI" Text="Play"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <TextBlock x:Name="PauseTB" Style="{StaticResource ControlTBStyle}"
+                        Text="&#xE769;" MouseDown="PauseTB_MouseDown">
+                        <TextBlock.ToolTip>
+                            <TextBlock FontFamily="Segoe UI" Text="Pause"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <TextBlock x:Name="ADBackwardTB" Style="{StaticResource ControlTBStyle}"
+                        Text="&#xE892;" MouseDown="ADBackwardTB_MouseDown">
+                        <TextBlock.ToolTip>
+                            <TextBlock FontFamily="Segoe UI" Text="Adjust backward (50ms)"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <TextBlock x:Name="ADForwardTB" Style="{StaticResource ControlTBStyle}"
+                        Text="&#xE893;" MouseDown="ADForwardTB_MouseDown">
+                        <TextBlock.ToolTip>
+                            <TextBlock FontFamily="Segoe UI" Text="Adjust forward (50ms)"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <TextBlock x:Name="ClearADTB" Style="{StaticResource ControlTBStyle}" 
+                        Text="&#xE845;" MouseDown="ClearADTB_MouseDown">
+                        <TextBlock.ToolTip>
+                            <TextBlock FontFamily="Segoe UI" Text="Clear adjustment"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <TextBlock x:Name="StopTB" Style="{StaticResource ControlTBStyle}" 
+                        Text="&#xE71A;" MouseDown="StopTB_MouseDown">
+                        <TextBlock.ToolTip>
+                            <TextBlock FontFamily="Segoe UI" Text="Stop"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock x:Name="SettingTB" Grid.Column="2" Style="{StaticResource ControlTBStyle}" 
+                    Text="&#xE713;" MouseDown="SettingTB_MouseDown">
+                <TextBlock.ToolTip>
+                    <TextBlock FontFamily="Segoe UI" Text="Setting"/>
+                </TextBlock.ToolTip>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Window>

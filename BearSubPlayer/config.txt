@@ -1,13 +1,20 @@
-﻿>>> configs
-# Main window opacity: 0.0 ~ 1.0
-MainOp: 0.5
-# Main window color: white = 0, black = 1
-MainCol: 0
-# Font size: 12 ~ 46
-FontSize: 32
-# Font color: white = 0, black = 1
-FontCol: 0
-# Font opacity: 0.0 ~ 1.0
-FontOp: 0.5
-# Font shadow softness: 5 ~ 15
-FontSn: 8
+﻿[pn_opacity]
+main panel opacity: 0.5
+
+[pn_color]
+main panel color: White
+
+[font_size]
+font size: 32
+
+[font_color]
+font color: Black
+
+[shadow_opacity]
+font shadow opacity: 0.5
+
+[shadow_softness]
+font shadow softness: 8
+
+[trigger]
+auto play trigger: SpaceKey

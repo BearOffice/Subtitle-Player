@@ -1,82 +1,81 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+
 using System.Timers;
+using Timer = System.Timers.Timer;
 
-namespace BearSubPlayer
+namespace BearSubPlayer.Core;
+
+public class SubTimer
 {
-    public class SubTimer
+    public event Action<SubTimer>? Elapsed;
+    public bool IsEnded { get; private set; }
+    public bool IsRunning => _timer.Enabled;
+    public TimeSpan ElapsedTime => _accumulatedTime + _stopwatch.Elapsed;
+    public TimeSpan SubTotalTime => _baseTotalTime + _adjustedTime;
+    public TimeSpan SubCurrentTime => ElapsedTime + _adjustedTime;
+    public TimeSpan AdjustedTime => _adjustedTime;
+
+    private readonly Stopwatch _stopwatch = new Stopwatch();
+    private readonly Timer _timer = new Timer(50);
+    private readonly TimeSpan _baseTotalTime;
+    private TimeSpan _adjustedTime;
+    private TimeSpan _accumulatedTime;
+
+    public SubTimer(TimeSpan totalTime)
     {
-        private readonly Stopwatch _stopWatch = new Stopwatch();
-        private readonly Timer _timer = new Timer(50);
-        private readonly TimeSpan _totalTime;
-        private TimeSpan _adjustTime = new TimeSpan();
-        private TimeSpan _previousTime = new TimeSpan();
-        public event Action Elapsed;
-        public bool IsEnded { get; private set; } = false;
-        public bool IsRunning
+        _baseTotalTime = totalTime;
+        _timer.Elapsed += OnTimerElapsed;
+    }
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        if (SubCurrentTime >= SubTotalTime)
         {
-            get => _timer.Enabled;
-        }
-        public TimeSpan TotalTime
-        {
-            get => _totalTime + _adjustTime;
-        }
-        public TimeSpan ElapsedTime
-        {
-            get => _previousTime + _stopWatch.Elapsed;
-        }
-        public TimeSpan CurrentTime
-        {
-            get => ElapsedTime + _adjustTime;
+            IsEnded = true;
+            Stop();
         }
 
-        public SubTimer(TimeSpan totalTime)
-        {
-            _totalTime = totalTime;
-            _timer.Elapsed += PublishEvent;
-        }
+        Elapsed?.Invoke(this);
+    }
 
-        private void PublishEvent(object sender, ElapsedEventArgs e)
-        {
-            if (CurrentTime >= TotalTime)
-            {
-                IsEnded = true;
-                Stop();
-            }
-            Elapsed?.Invoke();
-        }
+    public void Start()
+    {
+        if (IsRunning) return;
 
-        public void Start()
-        {
-            if (IsRunning) return;
-            _timer.Start();
-            _stopWatch.Start();
-        }
+        _stopwatch.Start();
+        _timer.Start();
+    }
 
-        public void Pause()
-        {
-            if (!IsRunning) return;
-            _previousTime += _stopWatch.Elapsed;
-            _timer.Stop();
-            _stopWatch.Reset();
-        }
+    public void Pause()
+    {
+        if (!IsRunning) return;
 
-        public void Stop()
-        {
-            _timer.Stop();
-            _stopWatch.Stop();
-        }
+        _accumulatedTime += _stopwatch.Elapsed;
+        _stopwatch.Reset();
+        _timer.Stop();
+    }
 
-        public void MoveTo(TimeSpan time)
-        {
-            _previousTime = time;
-            if (IsRunning)
-                _stopWatch.Restart();
-        }
+    public void Stop()
+    {
+        _stopwatch.Stop();
+        _timer.Stop();
+    }
 
-        public void AdjustTime(TimeSpan time)
-        {
-            _adjustTime += time;
-        }
+    public void MoveTo(TimeSpan time)
+    {
+        _accumulatedTime = time;
+
+        if (IsRunning)
+            _stopwatch.Restart();
+    }
+
+    public void AdjustTime(TimeSpan timeAdjustment)
+    {
+        _adjustedTime += timeAdjustment;
+    }
+
+    public void ClearTimeAdjustment()
+    {
+        _adjustedTime = TimeSpan.Zero;
     }
 }
