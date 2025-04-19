@@ -149,4 +149,4 @@ public enum AutoPlayTrigger
     None,
     MouseLeftClick,
     SpaceKey,
-} 
+}

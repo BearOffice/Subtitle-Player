@@ -10,9 +10,8 @@ public class SubTimer
     public event Action<SubTimer>? Elapsed;
     public bool IsEnded { get; private set; }
     public bool IsRunning => _timer.Enabled;
-    public TimeSpan ElapsedTime => _accumulatedTime + _stopwatch.Elapsed;
     public TimeSpan SubTotalTime => _baseTotalTime + _adjustedTime;
-    public TimeSpan SubCurrentTime => ElapsedTime + _adjustedTime;
+    public TimeSpan SubCurrentTime => _accumulatedTime + _stopwatch.Elapsed + _adjustedTime;
     public TimeSpan AdjustedTime => _adjustedTime;
 
     private readonly Stopwatch _stopwatch = new Stopwatch();
@@ -63,7 +62,9 @@ public class SubTimer
 
     public void MoveTo(TimeSpan time)
     {
-        _accumulatedTime = time;
+        // Since SubTimer only has properties that show the time after adjustment,
+        // we need to apply the internal adjustment to the input time.
+        _accumulatedTime = time - _adjustedTime;
 
         if (IsRunning)
             _stopwatch.Restart();

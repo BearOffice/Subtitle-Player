@@ -1,5 +1,4 @@
-﻿using BearSubPlayer.Core;
-using BearSubPlayer.Core.Actions;
+﻿using BearSubPlayer.Core.Actions;
 using BearSubPlayer.Core.DataTags;
 using BearSubPlayer.Helpers;
 using BearSubPlayer.Services;
@@ -211,10 +210,26 @@ public partial class MainWindow : Window
                 break;
             case MainPanelLocalStatus.SubLoaded:
                 SubLabel.IsEnabled = true;
+
+                PlayTB.IsEnabled = true;
+                PauseTB.IsEnabled = false;
+
                 PlayPanel.IsEnabled = true;
                 break;
             case MainPanelLocalStatus.Playing:
                 SubLabel.IsEnabled = false;
+
+                PlayTB.IsEnabled = false;
+                PauseTB.IsEnabled = true;
+
+                PlayPanel.IsEnabled = true;
+                break;
+            case MainPanelLocalStatus.Pausing:
+                SubLabel.IsEnabled = false;
+
+                PlayTB.IsEnabled = true;
+                PauseTB.IsEnabled = false;
+
                 PlayPanel.IsEnabled = true;
                 break;
         }
@@ -249,7 +264,8 @@ public partial class MainWindow : Window
 
     private void PauseTB_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        _dispatchCenter.DispatchEvent(new ActionArgs(MainAction.Pause), newThread: true);
+        _dispatchCenter.DispatchEvent(new ActionArgs(MainAction.Pause));
+        ChangeMainPanelLockStatus(MainPanelLocalStatus.Pausing);
     }
 
     private void ADBackwardTB_MouseDown(object sender, MouseButtonEventArgs e)
@@ -269,7 +285,7 @@ public partial class MainWindow : Window
 
     private void StopTB_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        _dispatchCenter.DispatchEvent(new ActionArgs(MainAction.Stop), newThread: true);
+        _dispatchCenter.DispatchEvent(new ActionArgs(MainAction.Stop));
         ChangeMainPanelLockStatus(MainPanelLocalStatus.Idling);
         ResetMainPanelContents();
     }
@@ -332,4 +348,5 @@ internal enum MainPanelLocalStatus
     Triggering,
     SubLoaded,
     Playing,
+    Pausing,
 }

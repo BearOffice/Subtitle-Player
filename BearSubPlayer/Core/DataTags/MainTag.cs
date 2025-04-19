@@ -2,10 +2,10 @@
 
 public enum MainTag
 {
-   LoadSuccessInfo,
-   LoadFailureReasons,
-   NeedFreezeInput,
-   CurrentTime,
-   TotalTime,
-   SubContent,
+    LoadSuccessInfo,
+    LoadFailureReasons,
+    NeedFreezeInput,
+    CurrentTime,
+    TotalTime,
+    SubContent,
 }

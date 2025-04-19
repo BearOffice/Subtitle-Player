@@ -1,5 +1,4 @@
 ﻿using BearSubPlayer.Core;
-using BearSubPlayer.Helpers;
 using BearSubPlayer.SubReaders;
 
 namespace BearSubPlayer.Services;

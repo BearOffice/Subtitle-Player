@@ -1,9 +1,9 @@
-﻿using BearSubPlayer.Core.DataTags;
+﻿using BearSubPlayer.Core.Actions;
+using BearSubPlayer.Core.DataTags;
 using BearSubPlayer.Helpers;
 using BearSubPlayer.Services;
 using BearSubPlayer.Stores;
 using System.Windows;
-using BearSubPlayer.Core.Actions;
 
 namespace BearSubPlayer.Windows;
 

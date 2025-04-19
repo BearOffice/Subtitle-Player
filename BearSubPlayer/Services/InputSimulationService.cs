@@ -1,12 +1,12 @@
-﻿using WindowsInput.Native;
-using WindowsInput;
+﻿using WindowsInput;
+using WindowsInput.Native;
 
 namespace BearSubPlayer.Services;
 
 public class InputSimulationService
 {
     private readonly InputSimulator _sim;
-    
+
     public InputSimulationService(InputSimulator sim)
     {
         _sim = sim;
